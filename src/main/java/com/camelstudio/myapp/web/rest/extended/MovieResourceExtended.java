@@ -5,6 +5,7 @@ import com.camelstudio.myapp.service.extended.MovieServiceExtended;
 import com.camelstudio.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +31,12 @@ public class MovieResourceExtended {
 
     public MovieResourceExtended(MovieServiceExtended movieServiceExtended) {
         this.movieServiceExtended = movieServiceExtended;
+    }
+
+    @GetMapping("/movie-extended")
+    public List<Movie> getAllMoviesOrGetMoviesBySearch(@RequestParam(required = false, name = "search") String search) {
+        log.debug("REST request to get all Movies");
+        return movieServiceExtended.getAllMoviesOrGetMoviesBySearch(search);
     }
 
     /**

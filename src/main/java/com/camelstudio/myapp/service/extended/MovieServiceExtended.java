@@ -7,6 +7,7 @@ import com.camelstudio.myapp.repository.extended.MovieRepositoryExtended;
 import com.camelstudio.myapp.service.CategoryService;
 import com.camelstudio.myapp.service.MovieService;
 import com.camelstudio.myapp.service.StaffService;
+import java.util.List;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,5 +68,13 @@ public class MovieServiceExtended extends MovieService {
         movie.setCategories(movie1.getCategories());
         movie.setMembreStaffs(movie1.getMembreStaffs());
         return movieService.save(movie);
+    }
+
+    public List<Movie> getAllMoviesOrGetMoviesBySearch(String search) {
+        if (search == null) {
+            return movieRepositoryExtended.findAll();
+        } else {
+            return movieRepositoryExtended.getMoviesBySearch(search);
+        }
     }
 }
